@@ -19,10 +19,18 @@ class ClickMouse(threading.Thread):
         self.root.iconbitmap("Mouse.ico")
         self.root.geometry("300x300")
         self.root.resizable(False, False)
+        self.widgets()
         self.delay = delay
         self.button = button
         self.running = False
         self.program_running = True
+
+    def widgets(self):
+        self.topFrame = LabelFrame(
+            self.root,
+            text="Speed Options",
+            relief="groove"
+        )
 
     def start_clicking(self):
         self.running = True
