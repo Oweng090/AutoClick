@@ -18,7 +18,7 @@ class ClickMouse(threading.Thread):
         self.root.title("Auto Clicker")
         self.root.iconbitmap("Mouse.ico")
         self.root.geometry("300x300")
-        self.root.resizable(False, False)
+        self.root.resizable(True, True)
         self.widgets()
         self.delay = delay
         self.button = button
@@ -34,8 +34,20 @@ class ClickMouse(threading.Thread):
 
         self.speedBox = Entry(
             self.topFrame,
-            width=20
+            width=10
         )
+
+        self.enterButton = Button(
+            self.topFrame,
+            text="Enter",
+            command=lambda: self.root.destroy()
+        )
+
+        self.topFrame.grid_configure(padx=10, pady=10)
+        self.speedBox.grid(row=0, column=0)
+        self.enterButton.grid(row=1, column=0)
+        for widget in self.topFrame.winfo_children():
+            widget.grid_configure(pady=10, padx=10)
 
     def start_clicking(self):
         self.running = True
@@ -53,6 +65,8 @@ class ClickMouse(threading.Thread):
                 mouse.click(self.button)
                 time.sleep(self.delay)
             time.sleep(0.1)
+
+        
 
 mouse = Controller()
 click_thread = ClickMouse(delay, button)
