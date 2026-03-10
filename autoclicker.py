@@ -32,6 +32,11 @@ class ClickMouse(threading.Thread):
             relief="groove"
         )
 
+        self.speedBox = Entry(
+            self.topFrame,
+            width=20
+        )
+
     def start_clicking(self):
         self.running = True
 
