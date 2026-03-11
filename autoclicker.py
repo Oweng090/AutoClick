@@ -16,9 +16,6 @@ class ClickMouse(threading.Thread):
         self.button = button
         self.running = False
         self.program_running = True
-        
-
-    
 
     def changeDelay(self, d):
         delay = d
