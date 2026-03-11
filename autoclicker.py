@@ -68,9 +68,7 @@ class ClickMouse(threading.Thread):
 
         
 
-mouse = Controller()
-click_thread = ClickMouse(delay, button)
-click_thread.start()
+
 
 def on_press(key):
     if key == start_stop_key:
@@ -84,3 +82,7 @@ def on_press(key):
 
 with Listener(on_press=on_press) as listener:
     listener.join()
+
+mouse = Controller()
+click_thread = ClickMouse(delay, button)
+click_thread.start()
