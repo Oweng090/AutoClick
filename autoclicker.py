@@ -1,4 +1,6 @@
 import time
+from tkinter import *
+from tkinter.ttk import *
 import threading
 from pynput.mouse import Button, Controller
 from pynput.keyboard import Listener, KeyCode
@@ -12,11 +14,50 @@ exit_key = KeyCode(char='e')       # Press 'e' to quit
 class ClickMouse(threading.Thread):
     def __init__(self, delay, button):
         super().__init__()
+        self.root = Tk()
+        self.root.title("Auto Clicker")
+        self.root.iconbitmap("Mouse.ico")
+        self.root.geometry("300x300")
+        self.root.resizable(False, False)
+        self.widgets()
+        self.root.mainloop()
         self.delay = delay
         self.button = button
         self.running = False
         self.program_running = True
 
+    def widgets(self):
+        self.topFrame = LabelFrame(
+            self.root,
+            text="Speed Options",
+            relief=GROOVE
+        )
+
+        self.bottomFrame = LabelFrame(
+            self.root,
+            relief=GROOVE
+        )
+
+        self.speedBox = Entry(
+            self.topFrame,
+            width=10
+        )
+        
+        self.instruction = Label(
+            text="Press 'S' to start, 'e' to exit"
+        )
+
+        self.topFrame.grid_configure(padx=10, pady=10)
+        self.bottomFrame.grid_configure(padx=10, pady=10)
+        self.speedBox.grid(row=0, column=0)
+        self.instruction.grid(row=0, column=0)
+        for widget in self.topFrame.winfo_children():
+            widget.grid_configure(padx=10, pady=10)
+        for widget in self.topFrame.winfo_children():
+            widget.grid_configure(pady=10, padx=10)
+# The problem is the tkinter runs on a mainloop and the key listener wants to run when the tkinter is done, they both need 
+# to run at the same time.
+    
     def changeDelay(self, d):
         delay = d
         return delay
